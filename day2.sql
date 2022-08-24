@@ -151,13 +151,21 @@ select * from calisanlar
 -- FOREIGN KEY--
 CREATE TABLE adresler
 (
-adres_id char(5),
+adres_id char(5) ,
 sokak varchar(20),
 cadde varchar(30),
 sehir varchar(20),
-CONSTRAINT id_fk FOREIGN KEY (adres_id) REFERENCES calisanlar(id)   
+CONSTRAINT fk FOREIGN KEY (adres_id) REFERENCES calisanlar(id)
 );
 INSERT INTO adresler VALUES('10003','Mutlu Sok', '40.Cad.','IST');
 INSERT INTO adresler VALUES('10003','Can Sok', '50.Cad.','Ankara');
 INSERT INTO adresler VALUES('10002','Ağa Sok', '30.Cad.','Antep');
 select * from adresler;
+INSERT INTO adresler VALUES('10012','Ağa Sok', '30.Cad.','Antep');
+--Parent tabloda olmayan id ile child tabloya ekleme yapamayız
+INSERT INTO adresler VALUES(NULL,'Ağa Sok', '30.Cad.','Antep');
+--Calısanlar id ile adresler tablosundaki adres_id ile eşlesenlere bakmak için
+select * from calisanlar,adresler WHERE calisanlar.id = adresler.adres_id;
+DROP table calisanlar
+--Parant tabloyu yani primary key olan tabloyu silmek istediğimizde tabloyu silmez
+--Önce child tabloyu silmemiz gerekir

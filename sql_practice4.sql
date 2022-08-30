@@ -30,12 +30,40 @@ select * from markalar;
 -- markada calisanlarin isimlerini ve maaşlarini listeleyin.
 select isim, maas, isyeri from calisanlar 
 where isyeri in(select marka_isim from markalar where calisan_sayisi>15000);   -- bağlantı noktası
--- in kullanacaksanız parantez içine aldığınız sorgu birden fazla değer föndermelidir 
+-- in kullanacaksanız parantez içine aldığınız sorgu birden fazla değer döndermelidir 
 
-select * from calisanlar;  -- tablosu için birleşme yeri işyeri sütunu
+select * from calisanlar; -- tablosu için birleşme yeri işyeri sütunu
 select * from markalar;   -- tablosu için birleşme yeri marka_isim sütunu
 
 -- SORU2: marka_id’si 101’den büyük olan marka çalişanlarinin isim, maaş ve
 --şehirlerini listeleyiniz.
-select isim, maas from calisanlar
-where isyeri in(select marka_isim from markalar where marka_id='101' );
+select isim, maas,sehir from calisanlar
+where isyeri in(select marka_isim from markalar where marka_id>101);
+
+-- SORU3: Ankara’da calisani olan markalarin marka id'lerini ve calisan sayilarini listeleyiniz.
+select marka_id, calisan_sayisi from markalar
+where marka_isim in(select isyeri from calisanlar where sehir='Ankara' );
+  
+      
+-- SORU4: Her markanin ismini, calisan sayisini ve o markaya ait calisanlarin toplam maaşini
+-- listeleyen bir Sorgu yaziniz.
+select marka_isim, calisan_sayisi from markalar;
+where marka_isim in (Select from calisanlar sum(maas); as toplam_maas);
+					from calisanlar as toplam_mas ;
+
+
+select marka_isim, marka_id,
+(select count(sehir) from calisanlar2 where marka_isim=isyeri )  as msehir_sayisi
+from markalar
+
+
+ 
+-- SORU5: Her markanin ismini, calisan sayisini ve o markaya ait calisanlarin ortalama maaşini listeleyen bir Sorgu yaziniz.
+
+
+-- SORU6: Her markanin ismini, calisan sayisini ve o markaya ait calisanlarin maksimum ve minumum maaşini listeleyen bir Sorgu yaziniz.
+
+
+-- SORU7: Her markanin id’sini, ismini ve toplam kaç şehirde bulunduğunu listeleyen bir SORGU yaziniz.
+
+

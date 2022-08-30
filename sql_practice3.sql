@@ -23,3 +23,18 @@ select * from students;
 -- 101 id öğrencinin ismini 'LEO OCEAN' olarak güncelleyinin
 update students set student_name='LEO OCEAN' where student_id='101';
 
+-- 101 id öğrencinin yasini 22 olarak güncelleyinin
+update students set student_age=21 where  student_id='101';--hata vercek kisitlama var
+
+-- 101 id öğrencinin ismini 'ALI CAN' olarak güncelleyinin
+
+
+-- 109 idli öğrencinin doğumtarihini 2010-12-11 olarak update yapın.
+
+
+--ilk iki veriden sonra 5 veriyi listeleyiniz
+
+
+-- yasi en buyyuk 4. 5.  6. kişilerin bilgilerini listeleyiniz
+
+

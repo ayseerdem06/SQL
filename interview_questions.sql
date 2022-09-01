@@ -37,18 +37,30 @@ FROM isciler;
 -- 1) Her iki tablodaki ortak id’leri ve 
 --    personel6 tablosunda bu id’ye sahip isimleri
 --    isme gore sirali olarak listeleyen query yaziniz
--- 2) Personel6 tablosunda kac tane kayit oldugunu gosteren query yazin
+SELECT isim FROM personel6 
+WHERE EXISTS (SELECT id FROM isciler WHERE isciler.id= personel6.id)
+ORDER BY isim;
 
+-- 2) Personel6 tablosunda kac tane kayit oldugunu gosteren query yazin
+SELECT * FROM isciler
+WHERE maas= (SELECT MAX(maas) FROM isciler);
+
+SELECT * FROM isciler 
+ORDER BY maas DESC LIMIT 1;
 
 -- 3)Isciler tablosunda en yuksek maasi alan kisinin tum bilgilerini gosteren query yazin
+SELECT MAX(maas) AS ikinci_EnYuksek_maas FROM isciler
+WHERE maas < (SELECT MAX(maas) FROM isciler);
 
 
 -- 4) Isciler tablosunda ikinci en yuksek maasi maasi gosteren query yazin
-
+SELECT MAX(maas) AS ikinci_EnYuksek_maas FROM isciler
+WHERE maas < (SELECT MAX(maas) FROM isciler);                            
                             
-                            
- --5) Isciler tablosunda ikinci en yuksek maasi alan kisinin tum bilgilerini listeleyen sorgu yaziniz
-                
-                            
+ --5) Isciler tablosunda ikinci en yuksek maasi alan kisinin tum bilgilerini listeleyen sorgu yaziniz                
+SELECT * FROM isciler WHERE maas = 
+(SELECT MAX(maas) AS ikinci_EnYuksek_maas FROM isciler
+WHERE maas < (SELECT MAX(maas) FROM isciler));
+                        
                             
             
